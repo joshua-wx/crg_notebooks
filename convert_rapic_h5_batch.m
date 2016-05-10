@@ -1,16 +1,16 @@
-function covert_rapic_h5_batch
+lenhfunction covert_rapic_h5_batch
 %WHAT: Batch script for rapid_odim in matlab. Needs to be converted to
 %bash. Does not support subdirectories. Requires rapic_to_odim utility
 %installed
 
 %set path
-rapic_path = '/home/meso/nick_data/20160214Melb/';
+rapic_path = '/home/meso/20161126_MtIsa/';
 if exist(rapic_path)~=7
     display('rapic_path does not exist, halting')
 end
 
 %set odim dir
-odim_path  = '/home/meso/nick_data/20160214Melb_odim/';
+odim_path  = '/home/meso/20161126_MtIsa_odimh5/';
 if exist(odim_path)~=7
     display('odim_path does not exist, halting')
 end
@@ -37,5 +37,5 @@ for i = 1:length(path_listing)
     
     %push through rapic_to_odim
     display(['Processing file ',num2str(i),' of ',num2str(length(path_listing)),' ',input_ffn]);
-    [~,~] = unix(['export LD_LIBRARY_PATH=/usr/lib; rapic_to_odim ',input_ffn,' ',output_ffn]); %note, reset lD path from matlab to system default
+    [~,~] = unix(['export LD_LIBRARY_PATH=/usr/lib; ./rapic_to_odim ',input_ffn,' ',output_ffn]); %note, reset lD path from matlab to system default
 end
