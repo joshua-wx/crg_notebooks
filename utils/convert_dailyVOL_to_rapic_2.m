@@ -1,4 +1,4 @@
-function convert_dailyVOL_to_rapic
+function convert_dailyVOL_to_rapic_2
 %Joshua Soderholm, June 2016
 %Climate Research Group, University of Queensland
 
@@ -36,14 +36,12 @@ for i = 1:length(path_listing)
     %open input file
     fid1      = fopen(input_ffn);
     %setup loop vars
-    rapic_tmp = '';
     tline     = fgets(fid1);
     %loop through file
     while ischar(tline)
-        %append to temp text
-        rapic_tmp = [rapic_tmp,tline];
         %if tline is end image line, move text dump into file and clear
-        if strcmp(tline(1:9),'/IMAGEEND')
+        if strcmp(tline(1:7),'COUNTRY')
+            rapic_tmp = tline;
             %check for error messages and remove
             k = strfind(rapic_tmp,'MSSG: 30 Status information following - 3D-Rapic TxDevice');
             if ~isempty(k)
@@ -61,15 +59,8 @@ for i = 1:length(path_listing)
             fprintf(fid2,'%s',rapic_tmp);
             %close
             fclose(fid2);
-            %clear text data
-            rapic_tmp = '';
         end
         tline = fgets(fid1);
-    end
-    %warn if it did not exit cleanly
-    if ~isempty(rapic_tmp)
-        display('warning, rapic_tmp not empty')
-        keyboard
     end
 end
     
