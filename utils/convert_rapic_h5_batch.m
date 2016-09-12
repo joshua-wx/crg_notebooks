@@ -8,13 +8,13 @@ function covert_rapic_h5_batch
 %character)
 
 %set path
-rapic_path = '/home/meso/Desktop/testing/out/';
+rapic_path = '/home/meso/Downloads/nick_20131017/54_rapic/';
 if exist(rapic_path)~=7
     display('rapic_path does not exist, halting')
 end
 
 %set odim dir
-odim_path  = '/home/meso/Desktop/testing/odim_out/';
+odim_path  = '/home/meso/Downloads/nick_20131017/54_odimh5/';
 if exist(odim_path)~=7
     display('odim_path does not exist, halting')
 end
@@ -76,7 +76,7 @@ for i = 1:length(path_listing)
             end
             %write back to temp file
             temp_fn = '/tmp/temp.rapic';
-            fid = fopen(temp_fn,'w');
+            fid = fopen(temp_fn,'wt');
             fprintf(fid,'%s',rapic_str);
             fclose(fid);
             %try and convert again
